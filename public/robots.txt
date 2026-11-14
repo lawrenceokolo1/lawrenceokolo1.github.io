@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lawrenceokolo1.github.io/sitemap.xml
