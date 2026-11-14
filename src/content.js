@@ -8,6 +8,7 @@ export const LINKS = {
 export const NAV = [
   { label: "Work", href: "#work" },
   { label: "Experience", href: "#experience" },
+  { label: "Talks", href: "#talks" },
   { label: "Stack", href: "#stack" },
 ];
 
@@ -56,7 +57,9 @@ export const PROJECTS = [
       { label: "GitHub", href: "https://github.com/lawrenceokolo1/agenticros" },
       { label: "agenticros.com", href: "https://agenticros.com" },
     ],
-    visual: "agents",
+    visual: "/img/agenticros-talk.webp",
+    photo: true,
+    caption: "Presenting the AgenticROS stack at BC + AI, March 2026. Photo: Michelle Diamond",
   },
   {
     id: "fery",
@@ -175,4 +178,37 @@ export const STACK = [
   { cat: "LLMs & agents", items: ["RAG", "MCP", "Function calling", "Evaluation", "FAISS", "Qdrant"] },
   { cat: "MLOps", items: ["MLflow", "Docker", "Kubernetes", "GitHub Actions", "Prometheus", "Triton"] },
   { cat: "Data & geo", items: ["Python", "SQL", "Pandas", "Spark", "Earth Engine", "GeoPandas"] },
+];
+
+export const PORTRAITS = {
+  hero: {
+    src: "/img/portrait.webp",
+    alt: "Lawrence Okolo speaking at BC + AI in Vancouver",
+    caption: "Speaking at BC + AI · Vancouver, March 2026",
+    credit: "Photo: Michelle Diamond",
+  },
+  formal: {
+    src: "/img/portrait-formal.webp",
+    alt: "Lawrence Okolo at the British Columbia Parliament Buildings in Victoria",
+  },
+};
+
+export const COMMUNITY = [
+  {
+    kicker: "Talk · BC + AI, March 2026",
+    title: "Can OpenClaw agents actually navigate a physical robot?",
+    body: "A live walkthrough of the AgenticROS stack: a chat message travels through an AI agent and ROS 2 to drive a real robot.",
+    link: { label: "See the project", href: "#agenticros" },
+  },
+  {
+    kicker: "Community · Vancouver",
+    title: "Vancouver Autonomous Systems Initiative",
+    body: "Hands-on demo sessions where engineers, researchers, and students build and test autonomous systems together.",
+    image: "/img/vasi-community.webp",
+    alt: "Members of the Vancouver Autonomous Systems Initiative at a demo session",
+    link: {
+      label: "Demo session recap",
+      href: "https://www.linkedin.com/posts/vancouver-autonomous-systems-initiative_demo-session-recap-vancouver-autonomous-activity-7435050694317084673-fGrF",
+    },
+  },
 ];

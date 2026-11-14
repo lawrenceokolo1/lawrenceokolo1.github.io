@@ -1,5 +1,5 @@
 import Visual from "./Visual.jsx";
-import { EDUCATION, EXPERIENCE, LINKS, NAV, PROJECTS, STACK, STATS } from "./content.js";
+import { COMMUNITY, EDUCATION, EXPERIENCE, LINKS, NAV, PORTRAITS, PROJECTS, STACK, STATS } from "./content.js";
 
 const Arrow = () => (
   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
@@ -32,18 +32,27 @@ function Hero() {
     <section id="top" className="hero">
       <div className="hero__glow" aria-hidden />
       <div className="wrap hero__inner">
-        <p className="eyebrow">Machine learning engineer · Vancouver, BC</p>
-        <h1 className="hero__title">
-          I build AI that helps robots <span>understand the world</span> they work in.
-        </h1>
-        <p className="hero__lead">
-          Seven years of production machine learning, from demand forecasting and visual search to LLM agents.
-          Today I build autonomous hospital robots and the spatial AI behind them at VASI.
-        </p>
-        <div className="hero__actions">
-          <a href="#work" className="btn">See my work</a>
-          <External href={LINKS.github} className="btn btn--ghost">GitHub</External>
+        <div className="hero__copy">
+          <p className="eyebrow">Machine learning engineer · Vancouver, BC</p>
+          <h1 className="hero__title">
+            I build AI that helps robots <span>understand the world</span> they work in.
+          </h1>
+          <p className="hero__lead">
+            Seven years of production machine learning, from demand forecasting and visual search to LLM agents.
+            Today I build autonomous hospital robots and the spatial AI behind them at VASI.
+          </p>
+          <div className="hero__actions">
+            <a href="#work" className="btn">See my work</a>
+            <External href={LINKS.github} className="btn btn--ghost">GitHub</External>
+          </div>
         </div>
+        <figure className="hero__portrait">
+          <img src={PORTRAITS.hero.src} alt={PORTRAITS.hero.alt} width={900} height={1350} fetchPriority="high" />
+          <figcaption>
+            <span>{PORTRAITS.hero.caption}</span>
+            <small>{PORTRAITS.hero.credit}</small>
+          </figcaption>
+        </figure>
         <dl className="stats">
           {STATS.map((s) => (
             <div key={s.label}>
@@ -59,10 +68,11 @@ function Hero() {
 
 function Project({ p, index }) {
   return (
-    <article className={`project ${index % 2 ? "project--flip" : ""}`}>
-      <div className={`project__visual ${p.visual.startsWith("/") ? "project__visual--shot" : ""}`}>
+    <article id={p.id} className={`project ${index % 2 ? "project--flip" : ""}`}>
+      <figure className={`project__visual ${p.visual.startsWith("/") && !p.photo ? "project__visual--shot" : ""} ${p.photo ? "project__visual--photo" : ""}`}>
         <Visual visual={p.visual} title={p.title} />
-      </div>
+        {p.caption && <figcaption>{p.caption}</figcaption>}
+      </figure>
       <div className="project__body">
         <p className="eyebrow">{String(index + 1).padStart(2, "0")} · {p.kicker}</p>
         <h3>{p.title}</h3>
@@ -104,6 +114,9 @@ function Experience() {
         <header className="section__head">
           <p className="eyebrow">Experience</p>
           <h2>Where I've done the work.</h2>
+          <figure className="portrait-card">
+            <img src={PORTRAITS.formal.src} alt={PORTRAITS.formal.alt} width={800} height={1000} loading="lazy" decoding="async" />
+          </figure>
           <p className="section__note">
             {EDUCATION.degree}<br />{EDUCATION.school}
           </p>
@@ -119,6 +132,34 @@ function Experience() {
             </li>
           ))}
         </ol>
+      </div>
+    </section>
+  );
+}
+
+function Community() {
+  return (
+    <section id="talks" className="section">
+      <div className="wrap">
+        <header className="section__head">
+          <p className="eyebrow">Talks & community</p>
+          <h2>Building in public, in Vancouver.</h2>
+        </header>
+        <div className="community">
+          {COMMUNITY.map((c) => (
+            <article key={c.title} className={`community__card ${c.image ? "community__card--photo" : ""}`}>
+              {c.image && <img src={c.image} alt={c.alt} loading="lazy" decoding="async" />}
+              <div className="community__body">
+                <p className="eyebrow">{c.kicker}</p>
+                <h3>{c.title}</h3>
+                <p>{c.body}</p>
+                {c.link && (c.link.href.startsWith("#")
+                  ? <a href={c.link.href} className="link">{c.link.label}</a>
+                  : <External href={c.link.href}>{c.link.label}</External>)}
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -173,6 +214,7 @@ export default function App() {
         <Hero />
         <Work />
         <Experience />
+        <Community />
         <Stack />
         <Contact />
       </main>
