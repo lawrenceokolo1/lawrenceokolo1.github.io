@@ -6,10 +6,10 @@ export const LINKS = {
 };
 
 export const NAV = [
+  { label: "Mission", href: "#mission" },
   { label: "Work", href: "#work" },
+  { label: "Partner", href: "#partner" },
   { label: "Notes", href: "#notes" },
-  { label: "Experience", href: "#experience" },
-  { label: "Stack", href: "#stack" },
 ];
 
 export const STATS = [
@@ -230,4 +230,70 @@ export const NOTES = [
     title: "Opened Vancouver AI Meetup #27 with a live robot demo",
     body: "On stage at the H.R. MacMillan Space Centre for BC + AI, showing OpenClaw agents controlling a real autonomous robot through AgenticROS.",
   },
+];
+
+export const MISSION = {
+  statement: "Making indoor spaces understandable to AI.",
+  body: "Hospitals are some of the hardest buildings on earth for a machine to work in. I'm building the spatial intelligence that lets autonomous systems understand them, navigate them, and work alongside the people inside, starting with hospital logistics at VASI.",
+  stages: [
+    {
+      num: "01",
+      title: "Map",
+      body: "Turn a building's floor plans into a live, routable model: every room, corridor, lift, door, and access rule.",
+      proof: { label: "VASI spatial platform", href: "#vasi" },
+    },
+    {
+      num: "02",
+      title: "Understand",
+      body: "Give machines reasoning about the space: vision-language models on edge hardware and policies learned through reinforcement learning.",
+      proof: { label: "Field notes", href: "#notes" },
+    },
+    {
+      num: "03",
+      title: "Act",
+      body: "Robots and agents that move through the building, take requests in plain language, and report what they see.",
+      proof: { label: "AgenticROS & Microbot", href: "#agenticros" },
+    },
+  ],
+};
+
+const mail = (subject) => `mailto:${LINKS.email}?subject=${encodeURIComponent(subject)}`;
+
+/** Who I want to work with; each opens an email with the subject filled in. */
+export const PARTNERS = [
+  {
+    who: "Hospitals & health authorities",
+    body: "Autonomous logistics and indoor wayfinding for your facility, built on a live map of your building.",
+    cta: "Talk about your facility",
+    href: mail("Hospital partnership"),
+  },
+  {
+    who: "Robotics & hardware companies",
+    body: "Bring your robots onto VASI's spatial platform, or connect ROS 2 fleets to AI agents through AgenticROS.",
+    cta: "Explore an integration",
+    href: mail("Robotics integration"),
+  },
+  {
+    who: "Research & academia",
+    body: "Collaborate on reinforcement learning, spatial AI, and vision-language models running on edge hardware.",
+    cta: "Propose a collaboration",
+    href: mail("Research collaboration"),
+  },
+  {
+    who: "Investors & programs",
+    body: "VASI is part of the Google for Startups Cloud Program and NVIDIA Inception. Happy to share where we're headed.",
+    cta: "Start a conversation",
+    href: mail("VASI investment conversation"),
+  },
+  {
+    who: "Events & communities",
+    body: "Talks and live robot demos on agentic AI, ROS 2, and physical AI, like the BC + AI meetup opener.",
+    cta: "Invite me to speak",
+    href: mail("Speaking invitation"),
+  },
+];
+
+export const BACKERS = [
+  { name: "Google for Startups Cloud Program", src: "/img/backer-google.webp" },
+  { name: "NVIDIA Inception Program", src: "/img/backer-nvidia.webp" },
 ];
