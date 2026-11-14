@@ -573,6 +573,66 @@ summary:focus-visible {
   color: var(--body);
 }
 
+/* ── Field notes: dated log ── */
+.section--notes {
+  padding-top: 0;
+}
+
+.notes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line-strong);
+}
+
+.notes li {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 24px;
+  padding: 26px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.notes__date {
+  position: relative;
+  padding-left: 18px;
+  font: 500 12px/1.9 var(--mono);
+  color: var(--ink-2);
+}
+
+.notes__date::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 8px;
+  height: 8px;
+  background: var(--mint);
+  border: 1.5px solid var(--ink-2);
+  border-radius: 50%;
+}
+
+.notes li:first-child .notes__date::before {
+  background: var(--ink-2);
+  box-shadow: 0 0 0 4px rgba(134, 227, 195, 0.45);
+}
+
+.notes h3 {
+  max-width: 40ch;
+  margin-bottom: 8px;
+  font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.notes p {
+  max-width: 44rem;
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--body);
+}
+
 /* ── Experience: CV table ── */
 .cv {
   margin: 0;
@@ -771,7 +831,8 @@ summary:focus-visible {
     gap: 6px;
   }
 
-  .cv li {
+  .cv li,
+  .notes li {
     grid-template-columns: 1fr;
     gap: 4px;
   }

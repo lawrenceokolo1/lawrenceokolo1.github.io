@@ -7,6 +7,7 @@ export const LINKS = {
 
 export const NAV = [
   { label: "Work", href: "#work" },
+  { label: "Notes", href: "#notes" },
   { label: "Experience", href: "#experience" },
   { label: "Stack", href: "#stack" },
 ];
@@ -52,7 +53,7 @@ export const PROJECTS = [
       "Platform-agnostic core over rosbridge, Zenoh, local, and WebRTC transports",
       "MCP server for Claude, function calling for Gemini, plugin for OpenClaw",
       "ROS 2 workspace with discovery, agent, and follow-me packages",
-      "Presented live at BC + AI, Vancouver, March 2026",
+      "Live demo opening Vancouver AI Meetup #27 (BC + AI) at the H.R. MacMillan Space Centre",
     ],
     stack: ["TypeScript", "ROS 2", "MCP", "Zenoh", "Docker"],
     links: [
@@ -62,6 +63,23 @@ export const PROJECTS = [
     visual: "/img/agenticros-talk.webp",
     photo: true,
     caption: "Presenting the AgenticROS stack · BC + AI, Mar 2026 · Photo: Michelle Diamond",
+  },
+  {
+    id: "microbot",
+    line: "Small autonomous robot designed, wired, and programmed in the VASI lab.",
+    kicker: "Robotics · Hardware",
+    title: "VASI Microbot",
+    summary:
+      "A small-scale robot that represents what VASI is building: designed, wired, and programmed in our Vancouver lab as part of our work in autonomous robotics and spatial intelligence.",
+    points: [
+      "Built end to end in-house: hardware, wiring, and software",
+      "Demoed at the Vancouver Physical AI Workshop hosted by Voxel51",
+      "A testbed for the autonomy behind VASI's hospital logistics robots",
+    ],
+    stack: ["Robotics", "Embedded", "Autonomy"],
+    links: [
+      { label: "vasi.ca", href: "https://vasi.ca" },
+    ],
   },
   {
     id: "fery",
@@ -139,9 +157,9 @@ export const PROJECTS = [
 export const EXPERIENCE = [
   {
     period: "2025 – Now",
-    org: "VASI",
-    role: "Autonomous hospital robots",
-    body: "Building the robots, the spatial platform, and the AI stack behind VASI: hospital mapping, route planning, ROS-based simulation, and natural-language interaction with staff.",
+    org: "VASI Systems",
+    role: "Health Robotics R&D",
+    body: "Building the robots, the spatial platform, and the AI stack behind VASI: hospital mapping, route planning, and natural-language interaction with staff. Leading the move from a classical navigation stack to reinforcement learning, and building the VASI Microbot in our Vancouver lab.",
   },
   {
     period: "2025 – Now",
@@ -175,7 +193,8 @@ export const EDUCATION = {
 };
 
 export const STACK = [
-  { cat: "Robotics", items: ["ROS 2", "Simulation", "SLAM", "Sensor fusion", "Zenoh", "Edge AI"] },
+  { cat: "Robotics", items: ["ROS 2", "Reinforcement learning", "Simulation", "SLAM", "Sensor fusion", "Zenoh"] },
+  { cat: "Edge AI", items: ["NVIDIA Jetson Orin", "NVIDIA Cosmos", "VLMs", "On-device inference", "Memory tuning"] },
   { cat: "Deep learning", items: ["PyTorch", "TensorFlow", "Hugging Face", "ViT", "CLIP", "Transformers"] },
   { cat: "LLMs & agents", items: ["RAG", "MCP", "Function calling", "Evaluation", "FAISS", "Qdrant"] },
   { cat: "MLOps", items: ["MLflow", "Docker", "Kubernetes", "GitHub Actions", "Prometheus", "Triton"] },
@@ -188,3 +207,27 @@ export const PORTRAIT = {
   caption: "BC + AI, Vancouver · Mar 2026",
   credit: "Photo: Michelle Diamond",
 };
+
+/** Dated field notes, newest first, drawn from LinkedIn posts. */
+export const NOTES = [
+  {
+    date: "Oct 2026",
+    title: "Took the VASI Microbot to the Vancouver Physical AI Workshop",
+    body: "Demoed our in-house robot at the workshop hosted by Voxel51: a small machine standing in for a much bigger system.",
+  },
+  {
+    date: "May 2026",
+    title: "Moved VASI's autonomy from classical navigation to reinforcement learning",
+    body: "Stepping back from the navigation stack that got us here, and investing in RL training, policy evaluation, and production integration.",
+  },
+  {
+    date: "Apr 2026",
+    title: "Ran NVIDIA Cosmos Reason 2B on an 8 GB Jetson Orin Nano Super",
+    body: "Got a vision-language reasoning model launching cleanly on a memory-constrained edge device by stopping the desktop, disabling swap, and flushing the OS cache first.",
+  },
+  {
+    date: "Mar 2026",
+    title: "Opened Vancouver AI Meetup #27 with a live robot demo",
+    body: "On stage at the H.R. MacMillan Space Centre for BC + AI, showing OpenClaw agents controlling a real autonomous robot through AgenticROS.",
+  },
+];

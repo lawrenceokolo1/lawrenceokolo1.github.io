@@ -1,4 +1,4 @@
-import { EDUCATION, EXPERIENCE, LINKS, NAV, PORTRAIT, PROJECTS, STACK, STATS } from "./content.js";
+import { EDUCATION, EXPERIENCE, LINKS, NAV, NOTES, PORTRAIT, PROJECTS, STACK, STATS } from "./content.js";
 
 const FEATURED = PROJECTS.filter((p) => p.featured);
 const INDEX = PROJECTS.filter((p) => !p.featured);
@@ -42,7 +42,7 @@ function Hero() {
       <div className="wrap">
         <p className="hero__meta">
           <span>Machine learning engineer</span>
-          <span>Robotics &amp; AI</span>
+          <span>Health robotics R&amp;D</span>
           <span>Vancouver, BC</span>
         </p>
         <h1 className="hero__name">Lawrence Okolo</h1>
@@ -159,11 +159,33 @@ function Work() {
   );
 }
 
+function Notes() {
+  return (
+    <section id="notes" className="section section--notes">
+      <div className="wrap">
+        <Marker num="03">Field notes</Marker>
+        <h2 className="section__title">Recently, in the lab and on stage.</h2>
+        <ol className="notes">
+          {NOTES.map((n) => (
+            <li key={n.title}>
+              <time className="notes__date">{n.date}</time>
+              <div>
+                <h3>{n.title}</h3>
+                <p>{n.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
 function Experience() {
   return (
     <section id="experience" className="section section--tint">
       <div className="wrap">
-        <Marker num="03">Experience</Marker>
+        <Marker num="04">Experience</Marker>
         <h2 className="section__title">Where I've done the work.</h2>
         <ol className="cv">
           {EXPERIENCE.map((e) => (
@@ -189,7 +211,7 @@ function Stack() {
   return (
     <section id="stack" className="section">
       <div className="wrap">
-        <Marker num="04">Stack</Marker>
+        <Marker num="05">Stack</Marker>
         <dl className="stack">
           {STACK.map((g) => (
             <div key={g.cat}>
@@ -208,7 +230,7 @@ function Contact() {
     <section id="contact" className="contact">
       <div className="hero__glow" aria-hidden />
       <div className="wrap">
-        <Marker num="05">Contact</Marker>
+        <Marker num="06">Contact</Marker>
         <p className="contact__lead">Building something with robots or AI?</p>
         <a href={`mailto:${LINKS.email}`} className="contact__email">{LINKS.email}</a>
         <div className="contact__links">
@@ -228,6 +250,7 @@ export default function App() {
       <main>
         <Hero />
         <Work />
+        <Notes />
         <Experience />
         <Stack />
         <Contact />
