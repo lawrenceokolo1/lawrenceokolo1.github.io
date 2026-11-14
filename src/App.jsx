@@ -25,7 +25,9 @@ function Nav() {
   return (
     <header className="nav-wrap">
       <nav className="nav" aria-label="Site">
-        <a href="#top" className="nav__brand">LO</a>
+        <a href="#top" className="nav__brand" aria-label="Lawrence Okolo, back to top">
+          <img src="/img/avatar.webp" alt="" width={36} height={36} />
+        </a>
         {NAV.map(({ label, href }) => (
           <a key={href} href={href} className="nav__link">{label}</a>
         ))}
