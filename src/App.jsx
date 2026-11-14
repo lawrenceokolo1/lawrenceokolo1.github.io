@@ -1,6 +1,6 @@
 import HeroScan from "./HeroScan.jsx";
 import {
-  BACKERS, EDUCATION, EXPERIENCE, LINKS, MISSION, NAV, NOTES, PARTNERS, PORTRAIT, PROJECTS, STACK, STATS,
+  BACKERS, EDUCATION, EXPERIENCE, LINKS, MISSION, NAV, NOTES, PARTNERS, PORTRAIT, PROJECTS, STACK,
 } from "./content.js";
 
 const FEATURED = PROJECTS.filter((p) => p.featured);
@@ -68,16 +68,6 @@ function Hero() {
           <span className="feed__rec" aria-hidden>CAM 01 · LIVE</span>
           <figcaption>{PORTRAIT.caption} · {PORTRAIT.credit}</figcaption>
         </figure>
-      </div>
-      <div className="wrap">
-        <dl className="stats">
-          {STATS.map((s) => (
-            <div key={s.label}>
-              <dt>{s.value}</dt>
-              <dd>{s.label}</dd>
-            </div>
-          ))}
-        </dl>
       </div>
     </section>
   );

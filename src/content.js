@@ -12,12 +12,6 @@ export const NAV = [
   { label: "Notes", href: "#notes" },
 ];
 
-export const STATS = [
-  { value: "7+", label: "years shipping production ML" },
-  { value: "12%", label: "inventory cost cut with demand forecasting" },
-  { value: "148k", label: "products in a ViT + FAISS search index" },
-];
-
 /**
  * Featured projects, most interesting first. `visual` picks the card art:
  * an image path, or a named SVG motif drawn in Visual.jsx.

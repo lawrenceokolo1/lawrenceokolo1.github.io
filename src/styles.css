@@ -265,7 +265,7 @@ summary:focus-visible {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding: clamp(128px, 14vw, 168px) 0 clamp(48px, 6vw, 72px);
+  padding: clamp(128px, 14vw, 168px) 0 clamp(80px, 10vw, 128px);
   margin-top: -64px;
   color: var(--white);
   background:
@@ -407,33 +407,6 @@ summary:focus-visible {
   background: linear-gradient(transparent, rgba(7, 20, 17, 0.85));
 }
 
-.stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin: clamp(56px, 7vw, 88px) 0 0;
-  border-top: 1px solid var(--night-line);
-}
-
-.stats div {
-  padding: 22px 24px 0 0;
-}
-
-.stats div + div {
-  padding-left: 24px;
-  border-left: 1px solid var(--night-line);
-}
-
-.stats dt {
-  font: 600 clamp(2rem, 3.6vw, 2.8rem)/1 var(--display);
-  letter-spacing: -0.04em;
-  color: var(--mint);
-}
-
-.stats dd {
-  margin: 8px 0 0;
-  font: 400 12px/1.5 var(--mono);
-  color: rgba(255, 255, 255, 0.6);
-}
 
 /* ── Sections ── */
 .section {
@@ -1162,16 +1135,6 @@ summary:focus-visible {
     max-width: 320px;
   }
 
-  .stats {
-    grid-template-columns: 1fr;
-  }
-
-  .stats div,
-  .stats div + div {
-    padding: 18px 0;
-    border-left: none;
-    border-bottom: 1px solid var(--night-line);
-  }
 
 
   .spec div,
