@@ -444,82 +444,101 @@ summary:focus-visible {
   background: var(--mint-soft);
 }
 
-/* ── Mission ── */
-.mission__intro {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: end;
-  gap: clamp(24px, 5vw, 80px);
-  margin-bottom: clamp(40px, 5vw, 64px);
+/* ── Mission: technical drawing on grid paper (Mona Sans Wide, rust accent; this section only) ── */
+.mission {
+  --paper: #f4f3ee;
+  --paper-grid: #e3e2dc;
+  --drafting: #12201c;
+  --rust: #b4532a;
+  padding: clamp(80px, 11vw, 140px) 0;
+  color: var(--drafting);
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--paper-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--paper-grid) 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
-.mission__intro .section__title {
-  margin-bottom: 0;
+.mission .marker,
+.mission .marker span {
+  color: var(--rust);
+}
+
+.mission .marker i {
+  background: var(--drafting);
+  opacity: 0.25;
+}
+
+.mission__title {
+  margin-bottom: 24px;
+  font: 800 clamp(2.2rem, 5.4vw, 4.4rem)/0.95 "Mona Sans Variable", "Mona Sans", sans-serif;
+  font-stretch: 125%;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
 }
 
 .mission__body {
-  margin: 0;
+  max-width: 44rem;
+  margin: 0 0 clamp(40px, 5vw, 64px);
   font-size: clamp(1.05rem, 1.5vw, 1.2rem);
-  line-height: 1.7;
-  color: var(--body);
+  line-height: 1.65;
+  color: #3d4b47;
 }
 
-.stages {
+.mission__stages {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   margin: 0;
   padding: 0;
   list-style: none;
-  border-top: 1px solid var(--line-strong);
+  background: var(--paper);
+  border: 1.5px solid var(--drafting);
 }
 
-.stages li {
-  position: relative;
+.mission__stages li {
   display: flex;
   flex-direction: column;
-  padding: 28px 32px 8px 0;
+  padding: clamp(24px, 3vw, 36px);
 }
 
-.stages li + li {
-  padding-left: 32px;
-  border-left: 1px solid var(--line);
+.mission__stages li + li {
+  border-left: 1.5px solid var(--drafting);
 }
 
-/* Arrow between stages: map → understand → act. */
-.stages li + li::before {
-  content: "→";
-  position: absolute;
-  left: -10px;
-  top: 22px;
-  width: 20px;
-  font: 500 14px/20px var(--mono);
-  text-align: center;
-  color: var(--ink-2);
-  background: var(--white);
+/* Outlined numerals, like a drawing's callouts. */
+.mission__num {
+  font: 800 clamp(4.5rem, 8vw, 7rem)/0.8 "Mona Sans Variable", "Mona Sans", sans-serif;
+  font-stretch: 125%;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--drafting);
 }
 
-.stages__num {
-  margin-bottom: 36px;
-  font: 500 12px var(--mono);
-  color: var(--ink-2);
+.mission__stages h3 {
+  margin: 28px 0 12px;
+  font: 800 clamp(1.3rem, 2vw, 1.6rem)/1 "Mona Sans Variable", "Mona Sans", sans-serif;
+  font-stretch: 125%;
+  letter-spacing: 0;
+  text-transform: uppercase;
 }
 
-.stages h3 {
-  margin-bottom: 12px;
-  font-size: clamp(2rem, 3.6vw, 3rem);
-  line-height: 1;
-}
-
-.stages p {
+.mission__stages p {
   margin: 0 0 24px;
   font-size: 16px;
-  line-height: 1.65;
-  color: var(--body);
+  line-height: 1.6;
+  color: #3d4b47;
 }
 
-.stages .link {
+.mission__proof {
   align-self: flex-start;
   margin-top: auto;
+  font: 500 13px/1.4 var(--mono);
+  color: var(--rust);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+
+.mission__proof:hover {
+  color: var(--drafting);
 }
 
 /* ── Featured systems ── */
@@ -1115,10 +1134,14 @@ summary:focus-visible {
 
   .hero__grid,
   .feature__grid,
-  .mission__intro,
   .partner__intro,
-  .stages {
+  .mission__stages {
     grid-template-columns: 1fr;
+  }
+
+  .mission__stages li + li {
+    border-left: none;
+    border-top: 1.5px solid var(--drafting);
   }
 
   .hero .scan {
@@ -1150,20 +1173,6 @@ summary:focus-visible {
     border-bottom: 1px solid var(--night-line);
   }
 
-  .stages li,
-  .stages li + li {
-    padding: 24px 0;
-    border-left: none;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .stages li + li::before {
-    display: none;
-  }
-
-  .stages__num {
-    margin-bottom: 16px;
-  }
 
   .spec div,
   .stack div {

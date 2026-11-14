@@ -85,20 +85,18 @@ function Hero() {
 
 function Mission() {
   return (
-    <section id="mission" className="section">
+    <section id="mission" className="mission">
       <div className="wrap">
         <Marker num="01">The mission</Marker>
-        <div className="mission__intro">
-          <h2 className="section__title">Map. Understand. Act.</h2>
-          <p className="mission__body">{MISSION.body}</p>
-        </div>
-        <ol className="stages">
+        <h2 className="mission__title">Map. Understand. Act.</h2>
+        <p className="mission__body">{MISSION.body}</p>
+        <ol className="mission__stages">
           {MISSION.stages.map((st) => (
             <li key={st.num}>
-              <span className="stages__num">{st.num}</span>
+              <span className="mission__num" aria-hidden>{st.num}</span>
               <h3>{st.title}</h3>
               <p>{st.body}</p>
-              <a href={st.proof.href} className="link">{st.proof.label}</a>
+              <a href={st.proof.href} className="mission__proof">{st.proof.label}</a>
             </li>
           ))}
         </ol>
