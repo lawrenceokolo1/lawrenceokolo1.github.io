@@ -159,7 +159,7 @@ export const EXPERIENCE = [
     period: "2025 – Now",
     org: "VASI Systems",
     role: "Health Robotics R&D",
-    body: "Building the robots, the spatial platform, and the AI stack behind VASI: hospital mapping, route planning, and natural-language interaction with staff. Leading the move from a classical navigation stack to reinforcement learning, and building the VASI Microbot in our Vancouver lab.",
+    body: "Building the robots, the spatial platform, and the AI stack behind VASI: hospital mapping, route planning, and natural-language interaction with staff. Leading the move from a classical navigation stack to reinforcement learning, working across Unitree and AgiBot quadrupeds and our own custom robots, including the VASI Microbot built in our Vancouver lab.",
   },
   {
     period: "2025 – Now",
@@ -193,12 +193,14 @@ export const EDUCATION = {
 };
 
 export const STACK = [
-  { cat: "Robotics", items: ["ROS 2", "Reinforcement learning", "Simulation", "SLAM", "Sensor fusion", "Zenoh"] },
-  { cat: "Edge AI", items: ["NVIDIA Jetson Orin", "NVIDIA Cosmos", "VLMs", "On-device inference", "Memory tuning"] },
-  { cat: "Deep learning", items: ["PyTorch", "TensorFlow", "Hugging Face", "ViT", "CLIP", "Transformers"] },
-  { cat: "LLMs & agents", items: ["RAG", "MCP", "Function calling", "Evaluation", "FAISS", "Qdrant"] },
-  { cat: "MLOps", items: ["MLflow", "Docker", "Kubernetes", "GitHub Actions", "Prometheus", "Triton"] },
-  { cat: "Data & geo", items: ["Python", "SQL", "Pandas", "Spark", "Earth Engine", "GeoPandas"] },
+  { cat: "Robots & platforms", items: ["Unitree quadrupeds", "AgiBot quadrupeds", "Custom robots (VASI Microbot)", "AMD Ryzen", "ROS 2"] },
+  { cat: "NVIDIA", items: ["Jetson platform", "Isaac ROS", "Isaac Sim", "Cosmos", "TensorRT", "CUDA"] },
+  { cat: "Robotics software", items: ["SLAM & localization", "Multi-sensor fusion", "Path planning & obstacle avoidance", "Reinforcement learning", "Model predictive control", "Fleet management & task dispatch", "Zenoh"] },
+  { cat: "Deployment & field ops", items: ["Robot commissioning", "Sensor calibration (LiDAR, RGB-D, IMU)", "Site mapping", "Routes & safety zones", "Elevator & door integration", "Charging docks", "Runbooks"] },
+  { cat: "Hardware", items: ["Embedded firmware (C++)", "PCB design", "Hardware controllers", "Electromechanical systems", "Hardware-software integration"] },
+  { cat: "AI & agents", items: ["PyTorch", "Hugging Face", "ViT & CLIP", "VLMs", "RAG", "MCP", "FAISS", "On-device inference"] },
+  { cat: "Software & infra", items: ["Python", "C++", "FastAPI", "Docker", "GitHub Actions", "PyTest", "Linux & networking", "Kafka", "Redis", "Prometheus & Grafana", "MLflow"] },
+  { cat: "Data & geo", items: ["SQL", "Pandas", "Spark", "Earth Engine", "GeoPandas"] },
 ];
 
 export const PORTRAIT = {
