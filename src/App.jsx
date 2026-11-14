@@ -1,5 +1,8 @@
-import Visual from "./Visual.jsx";
-import { COMMUNITY, EDUCATION, EXPERIENCE, LINKS, NAV, PORTRAITS, PROJECTS, STACK, STATS } from "./content.js";
+import { EDUCATION, EXPERIENCE, LINKS, NAV, PORTRAIT, PROJECTS, STACK, STATS } from "./content.js";
+
+const FEATURED = PROJECTS.filter((p) => p.featured);
+const INDEX = PROJECTS.filter((p) => !p.featured);
+const pad = (n) => String(n).padStart(2, "0");
 
 const Arrow = () => (
   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
@@ -13,11 +16,16 @@ const External = ({ href, children, className = "link" }) => (
   </a>
 );
 
+/** Mono section marker, e.g. "01 / Selected systems", with a rule running to the edge. */
+const Marker = ({ num, children }) => (
+  <p className="marker"><span>{num}</span>{children}<i aria-hidden /></p>
+);
+
 function Nav() {
   return (
     <header className="nav-wrap">
       <nav className="nav" aria-label="Site">
-        <a href="#top" className="nav__brand">Lawrence Okolo</a>
+        <a href="#top" className="nav__brand">LO</a>
         {NAV.map(({ label, href }) => (
           <a key={href} href={href} className="nav__link">{label}</a>
         ))}
@@ -31,28 +39,32 @@ function Hero() {
   return (
     <section id="top" className="hero">
       <div className="hero__glow" aria-hidden />
-      <div className="wrap hero__inner">
-        <div className="hero__copy">
-          <p className="eyebrow">Machine learning engineer · Vancouver, BC</p>
-          <h1 className="hero__title">
-            I build AI that helps robots <span>understand the world</span> they work in.
-          </h1>
-          <p className="hero__lead">
-            Seven years of production machine learning, from demand forecasting and visual search to LLM agents.
-            Today I build autonomous hospital robots and the spatial AI behind them at VASI.
-          </p>
-          <div className="hero__actions">
-            <a href="#work" className="btn">See my work</a>
-            <External href={LINKS.github} className="btn btn--ghost">GitHub</External>
+      <div className="wrap">
+        <p className="hero__meta">
+          <span>Machine learning engineer</span>
+          <span>Robotics &amp; AI</span>
+          <span>Vancouver, BC</span>
+        </p>
+        <h1 className="hero__name">Lawrence Okolo</h1>
+        <div className="hero__grid">
+          <div>
+            <p className="hero__statement">
+              I build AI that helps robots <em>understand the world</em> they work in.
+            </p>
+            <p className="hero__lead">
+              Seven years of production machine learning, from demand forecasting and visual search to LLM agents.
+              Today I build autonomous hospital robots and the spatial AI behind them at VASI.
+            </p>
+            <div className="hero__actions">
+              <a href="#work" className="btn">See the work</a>
+              <External href={LINKS.github} className="btn btn--ghost">GitHub</External>
+            </div>
           </div>
+          <figure className="hero__portrait">
+            <img src={PORTRAIT.src} alt={PORTRAIT.alt} width={900} height={1350} fetchPriority="high" />
+            <figcaption>{PORTRAIT.caption}<small>{PORTRAIT.credit}</small></figcaption>
+          </figure>
         </div>
-        <figure className="hero__portrait">
-          <img src={PORTRAITS.hero.src} alt={PORTRAITS.hero.alt} width={900} height={1350} fetchPriority="high" />
-          <figcaption>
-            <span>{PORTRAITS.hero.caption}</span>
-            <small>{PORTRAITS.hero.credit}</small>
-          </figcaption>
-        </figure>
         <dl className="stats">
           {STATS.map((s) => (
             <div key={s.label}>
@@ -66,28 +78,64 @@ function Hero() {
   );
 }
 
-function Project({ p, index }) {
+function Featured({ p, n }) {
   return (
-    <article id={p.id} className={`project ${index % 2 ? "project--flip" : ""}`}>
-      <figure className={`project__visual ${p.visual.startsWith("/") && !p.photo ? "project__visual--shot" : ""} ${p.photo ? "project__visual--photo" : ""}`}>
-        <Visual visual={p.visual} title={p.title} />
-        {p.caption && <figcaption>{p.caption}</figcaption>}
-      </figure>
-      <div className="project__body">
-        <p className="eyebrow">{String(index + 1).padStart(2, "0")} · {p.kicker}</p>
+    <article id={p.id} className="feature">
+      <header className="feature__head">
+        <span className="feature__code">SYS.{pad(n)}</span>
+        <p className="feature__kicker">{p.kicker}</p>
         <h3>{p.title}</h3>
-        <p className="project__summary">{p.summary}</p>
-        <ul className="project__points">
-          {p.points.map((pt) => <li key={pt}>{pt}</li>)}
-        </ul>
-        <ul className="tags">
-          {p.stack.map((s) => <li key={s}>{s}</li>)}
-        </ul>
-        <div className="project__links">
+      </header>
+      <div className="feature__grid">
+        <figure className={`feature__visual ${p.photo ? "feature__visual--photo" : ""}`}>
+          <img src={p.visual} alt={p.title} loading="lazy" decoding="async" />
+          {p.caption && <figcaption>{p.caption}</figcaption>}
+        </figure>
+        <dl className="spec">
+          <div>
+            <dt>What</dt>
+            <dd>{p.summary}</dd>
+          </div>
+          <div>
+            <dt>Highlights</dt>
+            <dd>
+              <ul>{p.points.map((pt) => <li key={pt}>{pt}</li>)}</ul>
+            </dd>
+          </div>
+          <div>
+            <dt>Stack</dt>
+            <dd className="spec__mono">{p.stack.join(" / ")}</dd>
+          </div>
+          <div>
+            <dt>Links</dt>
+            <dd className="spec__links">
+              {p.links.map((l) => <External key={l.href} href={l.href}>{l.label}</External>)}
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </article>
+  );
+}
+
+function IndexRow({ p, n }) {
+  return (
+    <details className="row">
+      <summary>
+        <span className="row__num">{pad(n)}</span>
+        <span className="row__title">{p.title}</span>
+        <span className="row__line">{p.line}</span>
+        <span className="row__stack">{p.stack.slice(0, 3).join(" / ")}</span>
+        <span className="row__toggle" aria-hidden />
+      </summary>
+      <div className="row__body">
+        <p>{p.summary}</p>
+        <ul>{p.points.map((pt) => <li key={pt}>{pt}</li>)}</ul>
+        <div className="spec__links">
           {p.links.map((l) => <External key={l.href} href={l.href}>{l.label}</External>)}
         </div>
       </div>
-    </article>
+    </details>
   );
 }
 
@@ -95,12 +143,16 @@ function Work() {
   return (
     <section id="work" className="section">
       <div className="wrap">
-        <header className="section__head">
-          <p className="eyebrow">Selected work</p>
-          <h2>Things I've built and shipped.</h2>
-        </header>
-        <div className="projects">
-          {PROJECTS.map((p, i) => <Project key={p.id} p={p} index={i} />)}
+        <Marker num="01">Selected systems</Marker>
+        <h2 className="section__title">Two systems I'm building now.</h2>
+        <div className="features">
+          {FEATURED.map((p, i) => <Featured key={p.id} p={p} n={i + 1} />)}
+        </div>
+
+        <Marker num="02">Index</Marker>
+        <h2 className="section__title">More shipped work.</h2>
+        <div className="index">
+          {INDEX.map((p, i) => <IndexRow key={p.id} p={p} n={FEATURED.length + i + 1} />)}
         </div>
       </div>
     </section>
@@ -110,56 +162,24 @@ function Work() {
 function Experience() {
   return (
     <section id="experience" className="section section--tint">
-      <div className="wrap split">
-        <header className="section__head">
-          <p className="eyebrow">Experience</p>
-          <h2>Where I've done the work.</h2>
-          <figure className="portrait-card">
-            <img src={PORTRAITS.formal.src} alt={PORTRAITS.formal.alt} width={800} height={1000} loading="lazy" decoding="async" />
-          </figure>
-          <p className="section__note">
-            {EDUCATION.degree}<br />{EDUCATION.school}
-          </p>
-        </header>
-        <ol className="timeline">
+      <div className="wrap">
+        <Marker num="03">Experience</Marker>
+        <h2 className="section__title">Where I've done the work.</h2>
+        <ol className="cv">
           {EXPERIENCE.map((e) => (
             <li key={e.org + e.period}>
-              <span className="timeline__period">{e.period}</span>
-              <div>
-                <h3>{e.org} <span>· {e.role}</span></h3>
-                <p>{e.body}</p>
-              </div>
+              <span className="cv__period">{e.period}</span>
+              <span className="cv__org">{e.org}</span>
+              <span className="cv__role">{e.role}</span>
+              <p className="cv__body">{e.body}</p>
             </li>
           ))}
+          <li>
+            <span className="cv__period">Education</span>
+            <span className="cv__org">{EDUCATION.school}</span>
+            <span className="cv__role">{EDUCATION.degree}</span>
+          </li>
         </ol>
-      </div>
-    </section>
-  );
-}
-
-function Community() {
-  return (
-    <section id="talks" className="section">
-      <div className="wrap">
-        <header className="section__head">
-          <p className="eyebrow">Talks & community</p>
-          <h2>Building in public, in Vancouver.</h2>
-        </header>
-        <div className="community">
-          {COMMUNITY.map((c) => (
-            <article key={c.title} className={`community__card ${c.image ? "community__card--photo" : ""}`}>
-              {c.image && <img src={c.image} alt={c.alt} loading="lazy" decoding="async" />}
-              <div className="community__body">
-                <p className="eyebrow">{c.kicker}</p>
-                <h3>{c.title}</h3>
-                <p>{c.body}</p>
-                {c.link && (c.link.href.startsWith("#")
-                  ? <a href={c.link.href} className="link">{c.link.label}</a>
-                  : <External href={c.link.href}>{c.link.label}</External>)}
-              </div>
-            </article>
-          ))}
-        </div>
       </div>
     </section>
   );
@@ -169,20 +189,15 @@ function Stack() {
   return (
     <section id="stack" className="section">
       <div className="wrap">
-        <header className="section__head">
-          <p className="eyebrow">Stack</p>
-          <h2>Tools I reach for.</h2>
-        </header>
-        <div className="stack">
+        <Marker num="04">Stack</Marker>
+        <dl className="stack">
           {STACK.map((g) => (
-            <div key={g.cat} className="stack__group">
-              <h3>{g.cat}</h3>
-              <ul className="tags">
-                {g.items.map((i) => <li key={i}>{i}</li>)}
-              </ul>
+            <div key={g.cat}>
+              <dt>{g.cat}</dt>
+              <dd>{g.items.join(" / ")}</dd>
             </div>
           ))}
-        </div>
+        </dl>
       </div>
     </section>
   );
@@ -191,11 +206,11 @@ function Stack() {
 function Contact() {
   return (
     <section id="contact" className="contact">
-      <div className="contact__glow" aria-hidden />
-      <div className="wrap contact__inner">
-        <p className="eyebrow">Contact</p>
-        <h2>Building something with robots or AI? Let's talk.</h2>
-        <a href={`mailto:${LINKS.email}`} className="btn">{LINKS.email}</a>
+      <div className="hero__glow" aria-hidden />
+      <div className="wrap">
+        <Marker num="05">Contact</Marker>
+        <p className="contact__lead">Building something with robots or AI?</p>
+        <a href={`mailto:${LINKS.email}`} className="contact__email">{LINKS.email}</a>
         <div className="contact__links">
           <External href={LINKS.linkedin}>LinkedIn</External>
           <External href={LINKS.github}>GitHub</External>
@@ -214,7 +229,6 @@ export default function App() {
         <Hero />
         <Work />
         <Experience />
-        <Community />
         <Stack />
         <Contact />
       </main>

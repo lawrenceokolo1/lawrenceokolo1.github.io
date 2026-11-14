@@ -8,7 +8,6 @@ export const LINKS = {
 export const NAV = [
   { label: "Work", href: "#work" },
   { label: "Experience", href: "#experience" },
-  { label: "Talks", href: "#talks" },
   { label: "Stack", href: "#stack" },
 ];
 
@@ -25,6 +24,7 @@ export const STATS = [
 export const PROJECTS = [
   {
     id: "vasi",
+    featured: true,
     kicker: "Robotics · Spatial AI",
     title: "VASI spatial platform",
     summary:
@@ -43,6 +43,7 @@ export const PROJECTS = [
   },
   {
     id: "agenticros",
+    featured: true,
     kicker: "Robotics · LLM agents",
     title: "AgenticROS",
     summary:
@@ -51,6 +52,7 @@ export const PROJECTS = [
       "Platform-agnostic core over rosbridge, Zenoh, local, and WebRTC transports",
       "MCP server for Claude, function calling for Gemini, plugin for OpenClaw",
       "ROS 2 workspace with discovery, agent, and follow-me packages",
+      "Presented live at BC + AI, Vancouver, March 2026",
     ],
     stack: ["TypeScript", "ROS 2", "MCP", "Zenoh", "Docker"],
     links: [
@@ -59,10 +61,11 @@ export const PROJECTS = [
     ],
     visual: "/img/agenticros-talk.webp",
     photo: true,
-    caption: "Presenting the AgenticROS stack at BC + AI, March 2026. Photo: Michelle Diamond",
+    caption: "Presenting the AgenticROS stack · BC + AI, Mar 2026 · Photo: Michelle Diamond",
   },
   {
     id: "fery",
+    line: "Production AI assistant for Canadian ferry schedules, in plain language.",
     kicker: "LLM · Production AI",
     title: "Fery",
     summary:
@@ -77,10 +80,10 @@ export const PROJECTS = [
       { label: "fery.ca", href: "https://fery.ca" },
       { label: "How it works", href: "https://vasi.ca/blog/fery-and-the-robot" },
     ],
-    visual: "chat",
   },
   {
     id: "vit-faiss",
+    line: "Visual product search over ~148k products with ViT + FAISS.",
     kicker: "Computer vision · MLOps",
     title: "Visual product search",
     summary:
@@ -95,10 +98,10 @@ export const PROJECTS = [
       { label: "Live demo", href: "https://huggingface.co/spaces/Lawrence-okolo/product-recommendation" },
       { label: "GitHub", href: "https://github.com/lawrenceokolo1/vit-faiss-product-recommendation" },
     ],
-    visual: "vectors",
   },
   {
     id: "vegetation",
+    line: "Landsat change detection of vegetation loss, tied to StatCan boundaries.",
     kicker: "Geospatial · Remote sensing",
     title: "Canada vegetation loss",
     summary:
@@ -112,10 +115,10 @@ export const PROJECTS = [
     links: [
       { label: "GitHub", href: "https://github.com/lawrenceokolo1/Canada_Boundary_Vegetation_Loss" },
     ],
-    visual: "terrain",
   },
   {
     id: "health",
+    line: "Deployed home-care scheduler, diabetes risk model, and data profiler.",
     kicker: "Healthcare ML",
     title: "Healthcare ML apps",
     summary:
@@ -130,7 +133,6 @@ export const PROJECTS = [
       { label: "Live apps", href: "https://lawrence-project.streamlit.app" },
       { label: "GitHub", href: "https://github.com/lawrenceokolo1/inactive-BC" },
     ],
-    visual: "pulse",
   },
 ];
 
@@ -180,35 +182,9 @@ export const STACK = [
   { cat: "Data & geo", items: ["Python", "SQL", "Pandas", "Spark", "Earth Engine", "GeoPandas"] },
 ];
 
-export const PORTRAITS = {
-  hero: {
-    src: "/img/portrait.webp",
-    alt: "Lawrence Okolo speaking at BC + AI in Vancouver",
-    caption: "Speaking at BC + AI · Vancouver, March 2026",
-    credit: "Photo: Michelle Diamond",
-  },
-  formal: {
-    src: "/img/portrait-formal.webp",
-    alt: "Lawrence Okolo at the British Columbia Parliament Buildings in Victoria",
-  },
+export const PORTRAIT = {
+  src: "/img/portrait.webp",
+  alt: "Lawrence Okolo speaking at BC + AI in Vancouver",
+  caption: "BC + AI, Vancouver · Mar 2026",
+  credit: "Photo: Michelle Diamond",
 };
-
-export const COMMUNITY = [
-  {
-    kicker: "Talk · BC + AI, March 2026",
-    title: "Can OpenClaw agents actually navigate a physical robot?",
-    body: "A live walkthrough of the AgenticROS stack: a chat message travels through an AI agent and ROS 2 to drive a real robot.",
-    link: { label: "See the project", href: "#agenticros" },
-  },
-  {
-    kicker: "Community · Vancouver",
-    title: "Vancouver Autonomous Systems Initiative",
-    body: "Hands-on demo sessions where engineers, researchers, and students build and test autonomous systems together.",
-    image: "/img/vasi-community.webp",
-    alt: "Members of the Vancouver Autonomous Systems Initiative at a demo session",
-    link: {
-      label: "Demo session recap",
-      href: "https://www.linkedin.com/posts/vancouver-autonomous-systems-initiative_demo-session-recap-vancouver-autonomous-activity-7435050694317084673-fGrF",
-    },
-  },
-];
