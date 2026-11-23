@@ -26,14 +26,20 @@ The source is three macOS screen recordings of the BC + AI YouTube video (2894×
 The script does four things:
 
 1. **Cut the best shots.** The `SHOTS` list at the top of the script picks each shot as
-   `file glob | start | end` in seconds. The current loop is: you at "The Stack" slide, the wide
-   audience shot, a volunteer trying the robot, then back to the stage so the loop wraps cleanly.
-   Start times skip the first seconds of each recording, where YouTube's pause icon and progress
-   bar are showing.
+   `file glob | start | end` in seconds. The current loop is four 4.5-second shots: you at "The
+   Stack" slide, the "VASI - OpenSource Robotic/ML lab" slide, the wide "Anyone want to try?" shot,
+   and a volunteer trying the robot. Start times skip the first seconds of each recording, where
+   YouTube's pause icon and progress bar are showing.
 2. **Crop off the captions and player UI.** `crop=2894:1530:0:0` keeps the top 1530 px of each
    frame, which removes the burned-in YouTube captions, the progress bar and the mouse cursor.
-3. **Crossfade and normalise.** Every shot is scaled to 1920 px wide at 30 fps, then joined with
-   0.6 s `xfade` dissolves into a high-quality master (`$TMPDIR/hero-video/master.mp4`).
+3. **Join with hard cuts.** Every shot is scaled to 1920 px wide at 30 fps and joined end to end
+   into a high-quality master (`$TMPDIR/hero-video/master.mp4`). Crossfades between different
+   camera angles look artificial, so each shot starts just after a camera cut in the original
+   edit. To find those cut points in new footage:
+
+   ```zsh
+   ffmpeg -i clip.mov -vf "select='gt(scene,0.2)',showinfo" -an -f null - 2>&1 | rg -o "pts_time:[0-9.]+"
+   ```
 4. **Compress for the web.** The master is re-encoded without audio: H.264 at CRF 27 with
    `+faststart` (so it starts playing before it finishes downloading), and VP9 at CRF 38. Each ends
    up around 2 MB. The poster is the frame at 2 s, resized to 1600 px.
@@ -52,7 +58,7 @@ The script does four things:
 
 1. Put the new recordings in one folder.
 2. Edit `SHOTS` in `scripts/make-hero-video.sh`: file names and start and end times. Aim for 3–5
-   shots of 3–5 seconds each, 15–20 seconds in total.
+   shots of 4–6 seconds each, 15–20 seconds in total, starting each just after a camera cut.
 3. If the new footage has no captions or player UI, change `CROP` to match its size, or remove the
    crop.
 4. Run the script, then `npm run dev` to preview.

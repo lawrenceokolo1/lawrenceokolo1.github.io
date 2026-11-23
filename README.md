@@ -2,7 +2,7 @@
 
 Personal portfolio of Lawrence Okolo, machine learning engineer in Vancouver, BC.
 
-Live at **https://lawrenceokolo1.github.io**
+Live at **https://lawrenceokolo.com**
 
 ## Develop
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 # Builds the homepage hero loop from screen recordings: cut shots, crop off captions/player UI,
-# crossfade them together, then compress to web MP4 + WebM and a poster still.
+# join them with hard cuts, then compress to web MP4 + WebM and a poster still.
 # Safe to re-run: every stage overwrites its own output. See docs/hero-video.md.
 set -euo pipefail
 
@@ -10,15 +10,16 @@ OUT_DIR=${0:A:h:h}/public
 WORK_DIR=${TMPDIR:-/tmp}/hero-video
 
 # Each shot: "<filename glob>|<start seconds>|<end seconds>"
+# Shots are joined with hard cuts, and each one starts just after a camera cut in the original edit,
+# so every transition lands where a real camera change happened.
 SHOTS=(
-  "*10.53.03*.mov|5|9.6"     # On stage at "The Stack" slide
-  "*10.54.36*.mov|8|12.6"    # Wide shot, talking to the audience
-  "*10.54.36*.mov|19|23.6"   # Volunteer tries the robot
-  "*10.53.03*.mov|12|16.6"   # Back to the stage, so the loop flows
+  "*10.53.03*.mov|6|10.5"      # On stage at "The Stack" slide
+  "*10.54.36*.mov|3.6|7.7"     # "VASI - OpenSource Robotic/ML lab" slide
+  "*10.54.36*.mov|8|12.5"      # Wide shot: "Anyone want to try?"
+  "*10.54.36*.mov|18.7|23.2"   # Volunteer tries the robot
 )
 CROP="crop=2894:1530:0:0"     # keep the top of the frame, drop burned-in captions + YouTube bar
 WIDTH=1920
-FADE=0.6                      # crossfade length in seconds
 POSTER_AT=2                   # seconds into the loop for the still image
 
 # ── Helpers ──────────────────────────────────────────────────────────────
@@ -32,26 +33,20 @@ resolve() {
   print -r -- "${matches[1]}"
 }
 
-# Builds "-i file" args (one per shot) and the trim + crossfade filter graph.
+# Builds "-i file" args (one per shot) and a trim + hard-cut concat filter graph.
 build_graph() {
   local filter="${CROP},scale=${WIDTH}:-2:flags=lanczos,fps=30,format=yuv420p,setsar=1"
-  local graph="" prev="" offset=0 i=0
+  local graph="" labels="" i=0
   INPUTS=()
   for shot in $SHOTS; do
     local parts=("${(@s:|:)shot}")
     INPUTS+=(-i "$(resolve ${parts[1]})")
     graph+="[${i}:v]trim=${parts[2]}:${parts[3]},setpts=PTS-STARTPTS,${filter}[s${i}];"
-    local length=$(( parts[3] - parts[2] ))
-    if (( i == 0 )); then
-      prev="s0"; offset=$(printf "%.2f" $(( length - FADE )))
-    else
-      graph+="[${prev}][s${i}]xfade=transition=fade:duration=${FADE}:offset=${offset}[x${i}];"
-      prev="x${i}"; offset=$(printf "%.2f" $(( offset + length - FADE )))
-    fi
+    labels+="[s${i}]"
     (( i += 1 ))
   done
-  GRAPH="${graph%;}"
-  LAST="$prev"
+  GRAPH="${graph}${labels}concat=n=${i}:v=1:a=0[out]"
+  LAST="out"
 }
 
 # ── Stages ───────────────────────────────────────────────────────────────
@@ -62,7 +57,7 @@ check_tools() {
 }
 
 make_master() {
-  step "Cutting, cropping and crossfading ${#SHOTS} shots"
+  step "Cutting, cropping and joining ${#SHOTS} shots"
   mkdir -p "$WORK_DIR"
   build_graph
   gum spin --title "Rendering master" -- \

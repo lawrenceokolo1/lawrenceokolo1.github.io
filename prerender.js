@@ -3,7 +3,7 @@ import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { render, ROUTES } from './dist-ssr/entry-server.js'
 
 // The one place the site's public address lives. Change it here when moving to a custom domain (see docs/custom-domain.md).
-const SITE = 'https://lawrenceokolo1.github.io'
+const SITE = 'https://lawrenceokolo.com'
 const dist = (path) => new URL(`./dist${path}`, import.meta.url)
 
 const shell = readFileSync(dist('/index.html'), 'utf8').replaceAll('__SITE__', SITE)
