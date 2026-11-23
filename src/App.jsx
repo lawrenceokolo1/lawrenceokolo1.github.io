@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import About from "./About.jsx";
 import HeroScan from "./HeroScan.jsx";
 import HeroVideo from "./HeroVideo.jsx";
+import { useScrollMemory } from "./navigation.jsx";
 import Post, { NotFound, NotesIndex } from "./Post.jsx";
 import { POSTS } from "./posts.jsx";
 import {
@@ -90,7 +91,7 @@ function AboutIntro() {
             <ul className="about-strip__facts">
               {ABOUT_FACTS.map((f) => <li key={f.k}><span>{f.k}</span>{f.v}</li>)}
             </ul>
-            <a href="/about/" className="btn btn--dark">Read my full story</a>
+            <a href="/about/" className="btn btn--dark">Read more</a>
           </div>
         </div>
       </div>
@@ -353,6 +354,7 @@ export const ROUTES = [
 ];
 
 export default function App() {
+  useScrollMemory();
   return (
     <>
       <Nav />

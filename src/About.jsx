@@ -1,4 +1,5 @@
 import { BACKERS, EDUCATION, EXPERIENCE, LINKS } from "./content.js";
+import { BackLink } from "./navigation.jsx";
 import { POSTS } from "./posts.jsx";
 
 const CERTS = [
@@ -35,20 +36,20 @@ export default function About() {
   return (
     <article className="page">
       <div className="wrap page__wrap">
+        <BackLink />
         <p className="page__meta"><a href="/">Lawrence Okolo</a><span>About</span></p>
         <h1 className="page__title">Engineer by trade. Founder by choice.</h1>
 
         <div className="about__intro">
           <div className="prose">
             <p className="prose__lead">
-              I&apos;m Lawrence Okolo, a machine learning engineer in Vancouver building AI systems that work in the
-              physical world. I co-founded VASI Systems, where I lead health robotics R&amp;D for autonomous robots in
-              hospitals, and I&apos;m Lead AI Engineer at HUGE.
+              I&apos;m Lawrence Okolo. I build AI that works in the physical world. I co-founded VASI Systems, where I
+              lead health robotics R&amp;D for autonomous robots in hospitals, and I&apos;m Lead AI Engineer at HUGE.
             </p>
             <p>
-              I stay hands-on. I write the code, build and wire the robots, train the models, and deploy them in front
-              of real users. My focus is systems that hold up outside the lab: in complex buildings, in regulated
-              environments, and at the level of reliability hospitals demand.
+              I write the code, wire the robots, train the models, and deploy them in front of real users. I build
+              systems that hold up outside the lab: in complex buildings, in regulated environments, and at the
+              reliability hospitals demand.
             </p>
           </div>
           <figure className="about__portrait">
@@ -60,29 +61,28 @@ export default function About() {
         <div className="prose">
           <h2>The path here</h2>
           <p>
-            I started in production machine learning. At The FMN Group I spent nearly four years as an MLOps engineer,
-            building and running the infrastructure behind demand-forecasting models across multiple regions. Those
-            models cut inventory costs by 12%, and taught me that a model is only worth what it does once it&apos;s
-            deployed.
+            I came up through production machine learning. At The FMN Group I built and ran the ML infrastructure
+            behind demand-forecasting models across multiple regions for nearly four years. Those models cut inventory
+            costs by 12%. The lesson stuck: a model is only worth what it does in production.
           </p>
           <p>
-            At Cognizant I worked as a machine learning researcher across 13+ technical domains: deep learning,
-            statistical modelling, and ML systems design. At the Canadian Red Cross I built data infrastructure and
-            quality standards for humanitarian operations across Canada, where bad data has real consequences for
+            At Cognizant I delivered machine learning research across 13+ technical domains: deep learning,
+            statistical modelling, and ML systems design. At the Canadian Red Cross I built the data infrastructure and
+            quality standards behind humanitarian operations across Canada, where bad data has real consequences for
             people who need help.
           </p>
           <p>
-            I hold a Master&apos;s in Applied Machine Intelligence from {EDUCATION.school}, focused on machine
-            learning systems, robotic autonomy, and spatial reasoning. That&apos;s where the pieces came together:
-            production ML, robots, and the question of how a machine understands a building.
+            My Master&apos;s in Applied Machine Intelligence at {EDUCATION.school} brought it together: production
+            ML, robotic autonomy, and spatial reasoning. It pointed me at the problem I&apos;m solving now, teaching
+            machines to understand buildings.
           </p>
 
           <h2>What I do now</h2>
           <h3>VASI Systems: co-founder, health robotics R&amp;D</h3>
           <p>
-            Hospitals are short-staffed, and nurses spend a large part of every shift moving supplies, medication, and
-            equipment instead of caring for patients. Robots can take that work on, but only if they truly understand
-            the building. At <Ext href="https://vasi.ca">VASI</Ext> I build that understanding:
+            Hospitals are short-staffed, and nurses lose a large part of every shift moving supplies, medication, and
+            equipment instead of caring for patients. Robots can take that work on, but only when they understand the
+            building. At <Ext href="https://vasi.ca">VASI</Ext> I lead the engineering that makes that possible:
           </p>
           <ul>
             <li>
@@ -95,17 +95,19 @@ export default function About() {
               Microbot built in our Vancouver lab.
             </li>
             <li>
-              <strong>The autonomy</strong>: leading the move from a classical navigation stack to{" "}
+              <strong>The autonomy</strong>: I&apos;m leading the move from a classical navigation stack to{" "}
               <a href="/notes/classical-navigation-to-reinforcement-learning/">reinforcement learning</a>, and running
               vision-language models <a href="/notes/cosmos-reason-jetson-orin-nano/">on the robot itself</a>.
             </li>
             <li>
-              <strong>The language layer</strong>: <Ext href="https://fery.ca">Fery</Ext>, a production AI assistant
-              for Canadian ferry schedules, proves the same stack that lets our robots talk with hospital staff.
+              <strong>The language layer</strong>: I built <Ext href="https://fery.ca">Fery</Ext>, a production AI
+              assistant for Canadian ferry schedules, to prove the same stack our robots use to talk with hospital
+              staff.
             </li>
           </ul>
           <p>
-            VASI is part of the NVIDIA Inception program and the Google for Startups Cloud Program.
+            NVIDIA and Google back VASI through the NVIDIA Inception program and the Google for Startups Cloud
+            Program.
           </p>
           <div className="about__backers">
             {BACKERS.map((b) => <img key={b.name} src={b.src} alt={b.name} loading="lazy" decoding="async" />)}
@@ -113,14 +115,14 @@ export default function About() {
 
           <h3>HUGE: Lead AI Engineer</h3>
           <p>
-            At HUGE I lead AI engineering across robotics and applied AI, from model development to deployment
-            infrastructure.
+            I lead AI engineering at HUGE across robotics and applied AI, from model development to the infrastructure
+            that ships it.
           </p>
 
           <h3>Open source</h3>
           <p>
-            <Ext href="https://agenticros.com">AgenticROS</Ext> lets any AI agent (Claude, Gemini, OpenClaw) control
-            and query ROS 2 robots in natural language. I also publish ML projects on{" "}
+            I created <Ext href="https://agenticros.com">AgenticROS</Ext>, which lets any AI agent (Claude, Gemini,
+            OpenClaw) control and query ROS 2 robots in natural language. I also ship ML projects on{" "}
             <Ext href={LINKS.github}>GitHub</Ext> and <Ext href={LINKS.huggingface}>Hugging Face</Ext>, from visual
             product search over ~148k products to Landsat-based vegetation-loss mapping across Canada.
           </p>
@@ -144,9 +146,9 @@ export default function About() {
 
           <h2>Healthcare training</h2>
           <p>
-            Building for hospitals means meeting hospital standards. I&apos;ve completed training through the
-            Provincial Health Services Authority (PHSA) LearningHub, BC&apos;s training platform for health-care
-            workers. Click a certificate to view it full size.
+            Building for hospitals means meeting hospital standards. I&apos;m trained through the Provincial Health
+            Services Authority (PHSA) LearningHub, the platform BC uses to train its health-care workers. Click a
+            certificate to view it full size.
           </p>
           <ul className="certs">
             {CERTS.map((c) => (
@@ -192,8 +194,9 @@ export default function About() {
 
           <h2>Work with me</h2>
           <p>
-            I want to hear from hospitals and health authorities, robotics companies, researchers, investors, and event
-            organisers. For work, partnerships, and VASI, email{" "}
+            I work with hospitals and health authorities, robotics companies, researchers, investors, and event
+            organisers. If you&apos;re ready to put autonomous systems to work, let&apos;s talk. For work,
+            partnerships, and VASI, email{" "}
             <a href={`mailto:${LINKS.vasiEmail}`}>{LINKS.vasiEmail}</a>. For speaking, research, and anything
             personal, use <a href={`mailto:${LINKS.email}`}>{LINKS.email}</a>. Or see{" "}
             <a href="/#partner">how we can work together</a>.

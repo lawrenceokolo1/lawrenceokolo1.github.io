@@ -1657,3 +1657,23 @@ summary:focus-visible {
     overflow-wrap: anywhere;
   }
 }
+
+/* ── Back link on About and notes pages ── */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 28px;
+  padding: 8px 14px 8px 10px;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  background: var(--mint-soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+.back-link:hover {
+  border-color: var(--ink-2);
+}

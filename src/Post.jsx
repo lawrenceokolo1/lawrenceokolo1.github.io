@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { BackLink } from "./navigation.jsx";
 import { POSTS } from "./posts.jsx";
 
 export default function Post() {
@@ -13,6 +14,7 @@ export default function Post() {
   return (
     <article className="page">
       <div className="wrap page__wrap">
+        <BackLink fallback="/notes/" />
         <p className="page__meta">
           <a href="/notes/">Field notes</a>
           <time>{post.date}</time>
@@ -48,6 +50,7 @@ export function NotesIndex() {
   return (
     <section className="page">
       <div className="wrap page__wrap">
+        <BackLink />
         <p className="page__meta"><a href="/">Lawrence Okolo</a><span>Field notes</span></p>
         <h1 className="page__title">Field notes from the lab and the stage.</h1>
         <ol className="notes-index">
