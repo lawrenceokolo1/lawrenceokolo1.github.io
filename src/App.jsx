@@ -1,6 +1,11 @@
+import { Route, Routes } from "react-router-dom";
+import About from "./About.jsx";
 import HeroScan from "./HeroScan.jsx";
+import HeroVideo from "./HeroVideo.jsx";
+import Post, { NotFound, NotesIndex } from "./Post.jsx";
+import { POSTS } from "./posts.jsx";
 import {
-  BACKERS, EDUCATION, EXPERIENCE, LINKS, MISSION, NAV, NOTES, PARTNERS, PORTRAIT, PROJECTS, STACK,
+  ABOUT_FACTS, BACKERS, EDUCATION, EXPERIENCE, LINKS, MISSION, NAV, NOTES, PARTNERS, PROJECTS, STACK,
 } from "./content.js";
 
 const FEATURED = PROJECTS.filter((p) => p.featured);
@@ -28,13 +33,13 @@ function Nav() {
   return (
     <header className="nav-wrap">
       <nav className="nav" aria-label="Site">
-        <a href="#top" className="nav__brand" aria-label="Lawrence Okolo, back to top">
+        <a href="/" className="nav__brand" aria-label="Lawrence Okolo, home">
           <img src="/img/avatar.webp" alt="" width={36} height={36} />
         </a>
         {NAV.map(({ label, href }) => (
-          <a key={href} href={href} className="nav__link">{label}</a>
+          <a key={href} href={href} className={`nav__link ${label === "About" ? "nav__link--keep" : ""}`}>{label}</a>
         ))}
-        <a href="#partner" className="nav__cta">Work with me</a>
+        <a href="/#partner" className="nav__cta">Work with me</a>
       </nav>
     </header>
   );
@@ -42,32 +47,52 @@ function Nav() {
 
 function Hero() {
   return (
-    <section id="top" className="hero">
-      <HeroScan />
-      <div className="wrap hero__grid">
-        <div className="hero__copy">
-          <p className="hero__meta">
-            <span>Lawrence Okolo</span>
-            <span>Health robotics R&amp;D · VASI Systems</span>
-            <span>Vancouver, BC</span>
-          </p>
-          <h1 className="hero__title">{MISSION.statement}</h1>
-          <p className="hero__lead">
-            I'm Lawrence Okolo, a machine learning engineer building the spatial intelligence and robots that let
-            autonomous systems work inside hospitals.
-          </p>
-          <div className="hero__actions">
-            <a href="#partner" className="btn">Partner with me</a>
-            <a href="#work" className="btn btn--ghost">See the work</a>
+    <section id="top" className="hero hero--video">
+      <HeroVideo />
+      <div className="wrap hero__copy">
+        <p className="hero__meta">
+          <span>Lawrence Okolo</span>
+          <span>Health robotics R&amp;D · VASI Systems</span>
+          <span>Vancouver, BC</span>
+        </p>
+        <h1 className="hero__title">{MISSION.statement}</h1>
+        <p className="hero__lead">
+          I'm Lawrence Okolo, a machine learning engineer building the spatial intelligence and robots that let
+          autonomous systems work inside hospitals.
+        </p>
+        <div className="hero__actions">
+          <a href="#partner" className="btn">Partner with me</a>
+          <a href="#work" className="btn btn--ghost">See the work</a>
+        </div>
+      </div>
+      <p className="hero__caption wrap">Live demo · AgenticROS at BC + AI, Vancouver · Mar 2026 · Video: BC + AI</p>
+    </section>
+  );
+}
+
+function AboutIntro() {
+  return (
+    <section id="about" className="section about-strip">
+      <div className="wrap">
+        <Marker num="01">About me</Marker>
+        <div className="about-strip__grid">
+          <figure className="about-strip__photo">
+            <img src="/img/victoria.webp" alt="Lawrence Okolo in Victoria, BC" loading="lazy" decoding="async" />
+          </figure>
+          <div>
+            <h2 className="section__title">Engineer by trade. Founder by choice.</h2>
+            <p className="about-strip__lead">
+              I build AI systems that work in the physical world. As co-founder of VASI Systems, I lead the robotics,
+              spatial intelligence, and AI behind autonomous robots for hospitals. As Lead AI Engineer at HUGE, I take
+              AI from model development to production. I stay hands-on: I write the code, build the robots, and deploy
+              them myself.
+            </p>
+            <ul className="about-strip__facts">
+              {ABOUT_FACTS.map((f) => <li key={f.k}><span>{f.k}</span>{f.v}</li>)}
+            </ul>
+            <a href="/about/" className="btn btn--dark">Read my full story</a>
           </div>
         </div>
-        {/* Portrait framed as a camera feed, with a detection box: a nod to the vision work. */}
-        <figure className="feed">
-          <img src={PORTRAIT.src} alt={PORTRAIT.alt} width={900} height={1350} fetchPriority="high" />
-          <span className="feed__box" aria-hidden><b>person · l.okolo</b></span>
-          <span className="feed__rec" aria-hidden>CAM 01 · LIVE</span>
-          <figcaption>{PORTRAIT.caption} · {PORTRAIT.credit}</figcaption>
-        </figure>
       </div>
     </section>
   );
@@ -77,7 +102,7 @@ function Mission() {
   return (
     <section id="mission" className="mission">
       <div className="wrap">
-        <Marker num="01">The mission</Marker>
+        <Marker num="02">The mission</Marker>
         <h2 className="mission__title">Map. Understand. Act.</h2>
         <p className="mission__body">{MISSION.body}</p>
         <ol className="mission__stages">
@@ -160,12 +185,12 @@ function Work() {
   return (
     <section id="work" className="section section--tint">
       <div className="wrap">
-        <Marker num="02">Selected systems</Marker>
+        <Marker num="03">Selected systems</Marker>
         <h2 className="section__title">The systems behind the mission.</h2>
         <div className="features">
           {FEATURED.map((p, i) => <Featured key={p.id} p={p} n={i + 1} />)}
         </div>
-        <Marker num="03">Index</Marker>
+        <Marker num="04">Index</Marker>
         <h2 className="section__title">More shipped work.</h2>
         <div className="index">
           {INDEX.map((p, i) => <IndexRow key={p.id} p={p} n={FEATURED.length + i + 1} />)}
@@ -180,7 +205,7 @@ function Partner() {
     <section id="partner" className="partner">
       <HeroScan />
       <div className="wrap">
-        <Marker num="04">Partner with me</Marker>
+        <Marker num="07">Partner with me</Marker>
         <div className="partner__intro">
           <h2 className="section__title">Let's put robots to work where they matter.</h2>
           <p>
@@ -216,14 +241,18 @@ function Notes() {
     <section id="notes" className="section">
       <div className="wrap">
         <Marker num="05">Field notes</Marker>
-        <h2 className="section__title">Recently, in the lab and on stage.</h2>
+        <div className="section__head">
+          <h2 className="section__title">Recently, in the lab and on stage.</h2>
+          <a href="/notes/" className="link">All field notes</a>
+        </div>
         <ol className="notes">
           {NOTES.map((n) => (
             <li key={n.title}>
               <time className="notes__date">{n.date}</time>
               <div>
-                <h3>{n.title}</h3>
+                <h3><a href={`/notes/${n.slug}/`}>{n.title}</a></h3>
                 <p>{n.body}</p>
+                <a href={`/notes/${n.slug}/`} className="link notes__more">Read the full note</a>
               </div>
             </li>
           ))}
@@ -271,9 +300,14 @@ function Contact() {
   return (
     <section id="contact" className="contact">
       <div className="wrap">
-        <Marker num="07">Contact</Marker>
+        <Marker num="08">Contact</Marker>
         <p className="contact__lead">Building something with robots or AI? Let's talk.</p>
-        <a href={`mailto:${LINKS.email}`} className="contact__email">{LINKS.email}</a>
+        <p className="contact__label">Work, partnerships &amp; VASI</p>
+        <a href={`mailto:${LINKS.vasiEmail}`} className="contact__email">{LINKS.vasiEmail}</a>
+        <p className="contact__label contact__label--alt">
+          Personal, speaking &amp; research{" "}
+          <a href={`mailto:${LINKS.email}`} className="link">{LINKS.email}</a>
+        </p>
         <div className="contact__links">
           <External href={LINKS.linkedin}>LinkedIn</External>
           <External href={LINKS.github}>GitHub</External>
@@ -285,18 +319,51 @@ function Contact() {
   );
 }
 
+const Home = () => (
+  <>
+    <Hero />
+    <AboutIntro />
+    <Mission />
+    <Work />
+    <Notes />
+    <Experience />
+    <Partner />
+    <Contact />
+  </>
+);
+
+/** Every prerendered URL with its page head; prerender.js writes one HTML file per entry. */
+export const ROUTES = [
+  { url: "/" },
+  {
+    url: "/notes/",
+    head: {
+      title: "Field notes · Lawrence Okolo",
+      description: "Notes from the lab and the stage: robotics, edge AI on NVIDIA Jetson, reinforcement learning, and AI agents for ROS 2.",
+    },
+  },
+  {
+    url: "/about/",
+    head: {
+      title: "About Lawrence Okolo · ML Engineer & Co-founder of VASI",
+      description: "Lawrence Okolo: Lead AI Engineer at HUGE and co-founder of VASI Systems. Career, robotics work, talks, healthcare training, and how to work together.",
+    },
+  },
+  ...POSTS.map((p) => ({ url: `/notes/${p.slug}/`, head: { title: `${p.title} · Lawrence Okolo`, description: p.description } })),
+];
+
 export default function App() {
   return (
     <>
       <Nav />
       <main>
-        <Hero />
-        <Mission />
-        <Work />
-        <Partner />
-        <Notes />
-        <Experience />
-        <Contact />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/notes" element={<NotesIndex />} />
+          <Route path="/notes/:slug" element={<Post />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </main>
       <footer className="footer wrap">
         <span>© {new Date().getFullYear()} Lawrence Okolo</span>

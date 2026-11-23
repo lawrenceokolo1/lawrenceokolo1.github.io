@@ -3,13 +3,22 @@ export const LINKS = {
   linkedin: "https://www.linkedin.com/in/lawrence-okolo",
   huggingface: "https://huggingface.co/Lawrence-okolo",
   email: "okololawrence48@yahoo.com",
+  vasiEmail: "lawrence@vasi.ca",
 };
 
 export const NAV = [
-  { label: "Mission", href: "#mission" },
-  { label: "Work", href: "#work" },
-  { label: "Partner", href: "#partner" },
-  { label: "Notes", href: "#notes" },
+  { label: "About", href: "/#about" },
+  { label: "Work", href: "/#work" },
+  { label: "Notes", href: "/#notes" },
+  { label: "Experience", href: "/#experience" },
+];
+
+/** Quick facts in the homepage About strip. */
+export const ABOUT_FACTS = [
+  { k: "Now", v: "Lead AI Engineer, HUGE · Co-founder, VASI Systems" },
+  { k: "Focus", v: "Robotics, spatial AI, edge AI on NVIDIA Jetson, AI agents for ROS 2" },
+  { k: "Education", v: "Master's, Applied Machine Intelligence, Northeastern University" },
+  { k: "Healthcare", v: "PHSA LearningHub: privacy & cybersecurity, OH&S, partner engagement" },
 ];
 
 /**
@@ -197,32 +206,29 @@ export const STACK = [
   { cat: "Data & geo", items: ["SQL", "Pandas", "Spark", "Earth Engine", "GeoPandas"] },
 ];
 
-export const PORTRAIT = {
-  src: "/img/portrait.webp",
-  alt: "Lawrence Okolo speaking at BC + AI in Vancouver",
-  caption: "BC + AI, Vancouver · Mar 2026",
-  credit: "Photo: Michelle Diamond",
-};
-
 /** Dated field notes, newest first, drawn from LinkedIn posts. */
 export const NOTES = [
   {
     date: "Oct 2026",
+    slug: "physical-ai-workshop-microbot",
     title: "Took the VASI Microbot to the Vancouver Physical AI Workshop",
     body: "Demoed our in-house robot at the workshop hosted by Voxel51: a small machine standing in for a much bigger system.",
   },
   {
     date: "May 2026",
+    slug: "classical-navigation-to-reinforcement-learning",
     title: "Moved VASI's autonomy from classical navigation to reinforcement learning",
     body: "Stepping back from the navigation stack that got us here, and investing in RL training, policy evaluation, and production integration.",
   },
   {
     date: "Apr 2026",
+    slug: "cosmos-reason-jetson-orin-nano",
     title: "Ran NVIDIA Cosmos Reason 2B on an 8 GB Jetson Orin Nano Super",
     body: "Got a vision-language reasoning model launching cleanly on a memory-constrained edge device by stopping the desktop, disabling swap, and flushing the OS cache first.",
   },
   {
     date: "Mar 2026",
+    slug: "vancouver-ai-meetup-agenticros",
     title: "Opened Vancouver AI Meetup #27 with a live robot demo",
     body: "On stage at the H.R. MacMillan Space Centre for BC + AI, showing OpenClaw agents controlling a real autonomous robot through AgenticROS.",
   },
@@ -253,7 +259,8 @@ export const MISSION = {
   ],
 };
 
-const mail = (subject) => `mailto:${LINKS.email}?subject=${encodeURIComponent(subject)}`;
+/** VASI business goes to the company inbox; everything else to the personal one. */
+const mail = (subject, to = LINKS.email) => `mailto:${to}?subject=${encodeURIComponent(subject)}`;
 
 /** Who I want to work with; each opens an email with the subject filled in. */
 export const PARTNERS = [
@@ -261,13 +268,13 @@ export const PARTNERS = [
     who: "Hospitals & health authorities",
     body: "Autonomous logistics and indoor wayfinding for your facility, built on a live map of your building.",
     cta: "Talk about your facility",
-    href: mail("Hospital partnership"),
+    href: mail("Hospital partnership", LINKS.vasiEmail),
   },
   {
     who: "Robotics & hardware companies",
     body: "Bring your robots onto VASI's spatial platform, or connect ROS 2 fleets to AI agents through AgenticROS.",
     cta: "Explore an integration",
-    href: mail("Robotics integration"),
+    href: mail("Robotics integration", LINKS.vasiEmail),
   },
   {
     who: "Research & academia",
@@ -279,7 +286,7 @@ export const PARTNERS = [
     who: "Investors & programs",
     body: "VASI is part of the Google for Startups Cloud Program and NVIDIA Inception. Happy to share where we're headed.",
     cta: "Start a conversation",
-    href: mail("VASI investment conversation"),
+    href: mail("VASI investment conversation", LINKS.vasiEmail),
   },
   {
     who: "Events & communities",
